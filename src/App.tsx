@@ -13,6 +13,8 @@ import { MemoryLeakDebugger } from './components/visualizations/MemoryLeakDebugg
 import { XSSPlayground } from './components/visualizations/XSSPlayground';
 import { CORSPreflightFlow } from './components/visualizations/CORSPreflightFlow';
 import { CSPHeaderVisualizer } from './components/visualizations/CSPHeaderVisualizer';
+import { SystemDesignCanvas } from './components/visualizations/SystemDesignCanvas';
+import { RenderingStrategyComparator } from './components/visualizations/RenderingStrategyComparator';
 import { CodeExplainer } from './components/ui/CodeExplainer';
 
 function App() {
@@ -72,7 +74,7 @@ function App() {
   };
 
   const handleExploreModule = (module: Module) => {
-    if ([1, 2, 3, 4, 8].includes(module.id)) {
+    if ([1, 2, 3, 4, 5, 8].includes(module.id)) {
       setActiveTab('internals');
       // Scroll to the specific module section
       setTimeout(() => {
@@ -152,7 +154,7 @@ function App() {
                       <span className="text-xs font-mono text-zinc-400">{module.estimatedHours} Hours</span>
                     </div>
                     <button className="flex items-center gap-1.5 text-indigo-400 text-sm font-bold group-hover:translate-x-1 transition-transform">
-                      { [1, 2, 3, 4, 8].includes(module.id) ? 'Open Lab' : 'Coming Soon' } <ChevronRight size={16} />
+                      { [1, 2, 3, 4, 5, 8].includes(module.id) ? 'Open Lab' : 'Coming Soon' } <ChevronRight size={16} />
                     </button>
                   </div>
                 </div>
@@ -353,6 +355,41 @@ function App() {
                     </div>
                     <MemoryLeakDebugger />
                   </div>
+                </div>
+              </div>
+            </section>
+
+            {/* Module 5: System Design */}
+            <section id="module-5" className="scroll-mt-24">
+              <div className="flex flex-col gap-2 mb-12">
+                <div className="flex items-center gap-2 text-indigo-400 font-bold text-xs uppercase tracking-[0.2em]">
+                  <Layers size={14} /> Module 05
+                </div>
+                <h2 className="text-5xl font-black tracking-tight mb-4">Frontend System Design</h2>
+                <p className="text-zinc-500 max-w-2xl leading-relaxed text-lg">
+                  Architect for scale. Master <strong>Rendering Strategies</strong>, <strong>Scalability Patterns</strong>, and <strong>Real-time Collaboration</strong> at millions of DAU.
+                </p>
+              </div>
+              
+              <div className="space-y-32">
+                <div className="space-y-8">
+                  <div className="flex flex-col gap-4">
+                    <h3 className="text-3xl font-bold tracking-tight">System Design Canvas</h3>
+                    <p className="text-zinc-500 leading-relaxed max-w-3xl">
+                      Drag and drop components to architect a scalable frontend. Use the <strong>Architecture Evaluator</strong> to grade your design against senior-level non-functional requirements.
+                    </p>
+                  </div>
+                  <SystemDesignCanvas />
+                </div>
+
+                <div className="space-y-8">
+                  <div className="flex flex-col gap-4">
+                    <h3 className="text-3xl font-bold tracking-tight">Rendering Strategy Comparator</h3>
+                    <p className="text-zinc-500 leading-relaxed max-w-3xl">
+                      Visualize the performance impact of different rendering strategies. Compare <strong>TTFB</strong>, <strong>FCP</strong>, and <strong>TBT</strong> across CSR, SSR, SSG, and RSC in real-time.
+                    </p>
+                  </div>
+                  <RenderingStrategyComparator />
                 </div>
               </div>
             </section>
