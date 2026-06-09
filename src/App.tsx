@@ -5,7 +5,9 @@ import { EventLoopVisualizer } from './components/visualizations/EventLoopVisual
 import { PixelPipelineSimulator } from './components/visualizations/PixelPipelineSimulator';
 import { LayoutThrashLab } from './components/visualizations/LayoutThrashLab';
 import { VDOMDiffVisualizer } from './components/visualizations/VDOMDiffVisualizer';
-import { MemoryLeakVisualizer } from './components/visualizations/MemoryLeakVisualizer';
+import { V8CompilationPipeline } from './components/visualizations/V8CompilationPipeline';
+import { HiddenClassTransitions } from './components/visualizations/HiddenClassTransitions';
+import { MemoryLeakDebugger } from './components/visualizations/MemoryLeakDebugger';
 import { CodeExplainer } from './components/ui/CodeExplainer';
 
 function App() {
@@ -289,12 +291,37 @@ function App() {
                 <div className="flex items-center gap-2 text-rose-400 font-bold text-xs uppercase tracking-[0.2em]">
                   <Cpu size={14} /> Module 04
                 </div>
-                <h2 className="text-5xl font-black tracking-tight mb-4">V8 Memory Management</h2>
+                <h2 className="text-5xl font-black tracking-tight mb-4">V8 Engine & Memory</h2>
                 <p className="text-zinc-500 max-w-2xl leading-relaxed text-lg">
-                  Understand how V8's Mark-and-Sweep GC works. Learn how to identify and fix <strong>Detached DOM Node</strong> leaks.
+                  Explore how V8 optimizes your JavaScript. From <strong>JIT Compilation</strong> to <strong>Hidden Classes</strong> and advanced <strong>Garbage Collection</strong>.
                 </p>
               </div>
-              <MemoryLeakVisualizer />
+              
+              <div className="space-y-32">
+                <V8CompilationPipeline />
+
+                <div className="grid grid-cols-1 gap-12">
+                  <div className="space-y-8">
+                    <div className="flex flex-col gap-4">
+                      <h3 className="text-3xl font-bold tracking-tight">Hidden Class Transitions</h3>
+                      <p className="text-zinc-500 leading-relaxed max-w-3xl">
+                        V8 uses "Shapes" or "Maps" to optimize object property access. Adding properties in different orders or using <code className="text-rose-400 bg-rose-400/10 px-1 rounded">delete</code> can trigger expensive transitions to <strong>Dictionary Mode</strong>.
+                      </p>
+                    </div>
+                    <HiddenClassTransitions />
+                  </div>
+
+                  <div className="space-y-8">
+                    <div className="flex flex-col gap-4">
+                      <h3 className="text-3xl font-bold tracking-tight">Memory Leak Debugger</h3>
+                      <p className="text-zinc-500 leading-relaxed max-w-3xl">
+                        Identify patterns that prevent the GC from reclaiming memory. Scan snippets for closures, detached DOM nodes, and forgotten timers to see their impact on the heap.
+                      </p>
+                    </div>
+                    <MemoryLeakDebugger />
+                  </div>
+                </div>
+              </div>
             </section>
           </main>
         )}
