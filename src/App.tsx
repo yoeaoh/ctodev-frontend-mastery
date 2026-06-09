@@ -10,6 +10,9 @@ import { KeyStabilityDemo } from './components/visualizations/KeyStabilityDemo';
 import { V8CompilationPipeline } from './components/visualizations/V8CompilationPipeline';
 import { HiddenClassTransitions } from './components/visualizations/HiddenClassTransitions';
 import { MemoryLeakDebugger } from './components/visualizations/MemoryLeakDebugger';
+import { XSSPlayground } from './components/visualizations/XSSPlayground';
+import { CORSPreflightFlow } from './components/visualizations/CORSPreflightFlow';
+import { CSPHeaderVisualizer } from './components/visualizations/CSPHeaderVisualizer';
 import { CodeExplainer } from './components/ui/CodeExplainer';
 
 function App() {
@@ -69,7 +72,7 @@ function App() {
   };
 
   const handleExploreModule = (module: Module) => {
-    if ([1, 2, 3, 4].includes(module.id)) {
+    if ([1, 2, 3, 4, 8].includes(module.id)) {
       setActiveTab('internals');
       // Scroll to the specific module section
       setTimeout(() => {
@@ -149,7 +152,7 @@ function App() {
                       <span className="text-xs font-mono text-zinc-400">{module.estimatedHours} Hours</span>
                     </div>
                     <button className="flex items-center gap-1.5 text-indigo-400 text-sm font-bold group-hover:translate-x-1 transition-transform">
-                      { [1, 2, 3, 4].includes(module.id) ? 'Open Lab' : 'Coming Soon' } <ChevronRight size={16} />
+                      { [1, 2, 3, 4, 8].includes(module.id) ? 'Open Lab' : 'Coming Soon' } <ChevronRight size={16} />
                     </button>
                   </div>
                 </div>
@@ -349,6 +352,53 @@ function App() {
                       </p>
                     </div>
                     <MemoryLeakDebugger />
+                  </div>
+                </div>
+              </div>
+            </section>
+
+            {/* Module 8: Security */}
+            <section id="module-8" className="scroll-mt-24">
+              <div className="flex flex-col gap-2 mb-12">
+                <div className="flex items-center gap-2 text-rose-500 font-bold text-xs uppercase tracking-[0.2em]">
+                  <Shield size={14} /> Module 08
+                </div>
+                <h2 className="text-5xl font-black tracking-tight mb-4">Security Mastery</h2>
+                <p className="text-zinc-500 max-w-2xl leading-relaxed text-lg">
+                  Protect your users and your data. From neutralizing <strong>XSS</strong> with React and <strong>CSP</strong> to mastering the <strong>CORS</strong> preflight handshake.
+                </p>
+              </div>
+              
+              <div className="space-y-32">
+                <div className="space-y-8">
+                  <div className="flex flex-col gap-4">
+                    <h3 className="text-3xl font-bold tracking-tight">XSS Playground</h3>
+                    <p className="text-zinc-500 leading-relaxed max-w-3xl">
+                      Experiment with cross-site scripting attacks in a safe, sandboxed environment. Observe how React's default escaping protects you and how a strict Content Security Policy acts as your last line of defense.
+                    </p>
+                  </div>
+                  <XSSPlayground />
+                </div>
+
+                <div className="grid grid-cols-1 lg:grid-cols-2 gap-12">
+                  <div className="space-y-8">
+                    <div className="flex flex-col gap-4">
+                      <h3 className="text-3xl font-bold tracking-tight">CSP Policy Builder</h3>
+                      <p className="text-zinc-500 leading-relaxed">
+                        Design a robust Content Security Policy. See how different directives like <code className="text-indigo-400">nonce</code> and <code className="text-indigo-400">strict-dynamic</code> block unauthorized script execution.
+                      </p>
+                    </div>
+                    <CSPHeaderVisualizer />
+                  </div>
+
+                  <div className="space-y-8">
+                    <div className="flex flex-col gap-4">
+                      <h3 className="text-3xl font-bold tracking-tight">CORS Preflight Flow</h3>
+                      <p className="text-zinc-500 leading-relaxed">
+                        Demystify the CORS "Preflight" handshake. Trace the OPTIONS request as it verifies origin, methods, and headers before allowing the actual data transmission.
+                      </p>
+                    </div>
+                    <CORSPreflightFlow />
                   </div>
                 </div>
               </div>
